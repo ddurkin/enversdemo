@@ -20,10 +20,13 @@ grails.project.dependency.resolution = {
 
         grailsPlugins()
         grailsHome()
-        grailsCentral()
 
-        mavenLocal()
-        mavenCentral()
+        mavenRepo 'http://bard-repo:8081/artifactory/bard-virtual-repo'
+        grailsRepo('http://bard-repo:8081/artifactory/bard-virtual-repo', 'grailsCentral')
+//        grailsCentral()
+//
+//        mavenLocal()
+//        mavenCentral()
 
         // uncomment these (or add new ones) to enable remote dependency resolution from public Maven repositories
         //mavenRepo "http://snapshots.repository.codehaus.org"
@@ -33,7 +36,7 @@ grails.project.dependency.resolution = {
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
-
+        build 'com.oracle:ojdbc6:11.2.0.2.0'
         // runtime 'mysql:mysql-connector-java:5.1.20'
     }
 
