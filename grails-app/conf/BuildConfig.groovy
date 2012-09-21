@@ -52,6 +52,7 @@ grails.project.dependency.resolution = {
         runtime ":database-migration:1.1"
 
         compile ':cache:1.0.0'
+        compile ":console:1.2"
 
         // add this
         runtime ":envers:0.3-SNAPSHOT"
