@@ -1,8 +1,8 @@
 package pl.refaktor.enversdemo
 
+import grails.plugins.springsecurity.Secured
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.transaction.annotation.Transactional
-import grails.plugins.springsecurity.Secured
 
 @Transactional
 class HotelController {
@@ -49,6 +49,16 @@ class HotelController {
         }
 
         [hotelInstance: hotelInstance]
+    }
+    @Secured(['ROLE_USER'])
+    def showAudit(Long id) {
+        def revisions = Hotel.findAllRevisionsById(id)
+        if (!revisions) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'hotel.label', default: 'Hotel'), id])
+            redirect(action: "list")
+            return
+        }
+        [revisions: revisions]
     }
 
     @Secured(['ROLE_USER'])
