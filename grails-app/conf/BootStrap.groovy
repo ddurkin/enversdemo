@@ -1,4 +1,5 @@
 import pl.refaktor.enversdemo.*
+import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 
 class BootStrap {
 
@@ -6,11 +7,18 @@ class BootStrap {
 
         environments {
             development {
-                createTestRoleAndUser()
+                User.findByUsername('system') ?: new User(
+                                    username: 'system',
+                                    password: 'system',
+                                    enabled: false).save(flush: true, failOnError: true)
 
-                if (Hotel.count() == 0) {
-                    createAstoria()
-                    createHolidayInn()
+                SpringSecurityUtils.doWithAuth("system"){
+                    createTestRoleAndUser()
+
+                    if (Hotel.count() == 0) {
+                        createAstoria()
+                        createHolidayInn()
+                    }
                 }
             }
         }
