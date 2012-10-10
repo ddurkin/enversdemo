@@ -12,25 +12,19 @@ class Hotel {
 
     String name
 
-    static constraints = {
-    }
-
-
     List<Booking> bookings = [] as List<Booking>
 
     static hasMany = [bookings: Booking]
+
+    static constraints = {
+    }
 
     static mapping = {
         bookings(indexColumn: [name: 'position', type: Integer])
     }
 
-    @OneToMany(mappedBy='hotel')
-    @JoinColumn(name = "hotel_id")
-    @IndexColumn(name = "position", nullable = false)
     @AuditMappedBy(mappedBy = "hotel", positionMappedBy = "position")
     public List<Booking> getBookings() {
         this.bookings
     }
-
-
 }
