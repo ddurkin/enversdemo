@@ -8,4 +8,4 @@ import pl.refaktor.enversdemo.Hotel
             hotel.bookings.reverse(true)
         }
     }
-}  
+}
