@@ -6,20 +6,23 @@ import org.hibernate.envers.Audited
 class Booking {
 
     String surname
-    Date   startDate
+    Date startDate
     Integer daysCount
+
 
     Hotel hotel
 
-    static belongsTo = [hotel:Hotel]
+    Integer position
 
+    static belongsTo = [hotel: Hotel]
 
     static constraints = {
     }
 
-
-
-
+    static mapping = {
+        hotel(insertable: false, updateable: false)
+        position(insertable: false, updateable: false)
+    }
 
 
 }
