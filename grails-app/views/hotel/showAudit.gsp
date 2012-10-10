@@ -27,12 +27,17 @@
         <div class="message" role="status">${flash.message}</div>
     </g:if>
 
+
     <g:each in="${revisions}" var="rev">
 
         <ol class="property-list hotel">
             <li class="fieldcontain">
                 <span id="transaction-label" class="property-label">transaction id :</span>
                 <span class="property-value">${rev.revisionEntity.id}</span>
+            </li>
+            <li class="fieldcontain">
+                <span id="version-label" class="property-label">version :</span>
+                <span class="property-value">${rev.version}</span>
             </li>
             <li class="fieldcontain">
                 <span id="revisionDate-label" class="property-label">revisionDate :</span>
@@ -55,7 +60,14 @@
 
         </ol>
     </g:each>
+    <g:paginate
+                params="${[id : revisions.first().id]}"
+                maxsteps="0"
+                max="5"
+                action="showAudit"
+                total="$totalCount"/>
 
+    %{--total="${revisions.getTotalCount()}" />--}%
 
     <g:form>
         <fieldset class="buttons">

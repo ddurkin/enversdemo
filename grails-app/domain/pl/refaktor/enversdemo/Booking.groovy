@@ -9,8 +9,15 @@ class Booking {
     Date   startDate
     Integer daysCount
 
+
+
+
     static constraints = {
     }
 
-    static belongsTo = [hotel: Hotel]
+
+
+
+
+
 }

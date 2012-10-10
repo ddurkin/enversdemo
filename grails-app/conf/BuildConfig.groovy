@@ -20,10 +20,13 @@ grails.project.dependency.resolution = {
 
         grailsPlugins()
         grailsHome()
-        grailsCentral()
 
-        mavenLocal()
-        mavenCentral()
+        mavenRepo 'http://bard-repo:8081/artifactory/bard-virtual-repo'
+        grailsRepo('http://bard-repo:8081/artifactory/bard-virtual-repo', 'grailsCentral')
+//        grailsCentral()
+//
+//        mavenLocal()
+//        mavenCentral()
 
         // uncomment these (or add new ones) to enable remote dependency resolution from public Maven repositories
         //mavenRepo "http://snapshots.repository.codehaus.org"
@@ -33,29 +36,21 @@ grails.project.dependency.resolution = {
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
-
-        // runtime 'mysql:mysql-connector-java:5.1.20'
+        build 'com.oracle:ojdbc6:11.2.0.2.0'
+        compile ('org.hibernate:hibernate-envers:3.6.10.Final')
     }
 
     plugins {
         runtime ":hibernate:$grailsVersion"
         runtime ":jquery:1.7.2"
         runtime ":resources:1.1.6"
-
-        // Uncomment these (or add new ones) to enable additional resources capabilities
-        //runtime ":zipped-resources:1.0"
-        //runtime ":cached-resources:1.0"
-        //runtime ":yui-minify-resources:0.1.4"
-
         build ":tomcat:$grailsVersion"
-
-        runtime ":database-migration:1.1"
 
         compile ':cache:1.0.0'
         compile ":console:1.2"
+        compile ":grails-envers:0.4.4"
 
-        // add this
-        runtime ":envers:0.3-SNAPSHOT"
         runtime ":spock:0.6"
+        runtime ":database-migration:1.1"
     }
 }

@@ -7,29 +7,34 @@ class BootStrap {
 
         environments {
             development {
-                User.findByUsername('system') ?: new User(
-                                    username: 'system',
-                                    password: 'system',
-                                    enabled: false).save(flush: true, failOnError: true)
-
-                SpringSecurityUtils.doWithAuth("system"){
-                    createTestRoleAndUser()
-
-                    if (Hotel.count() == 0) {
-                        createAstoria()
-                        createHolidayInn()
-                    }
-                }
+                createSomeUsersAndData()
             }
         }
     }
+
     def destroy = {
+    }
+
+    public void createSomeUsersAndData() {
+        User.findByUsername('system') ?: new User(
+                username: 'system',
+                password: 'system',
+                enabled: false).save(flush: true, failOnError: true)
+
+        SpringSecurityUtils.doWithAuth("system") {
+            createTestRoleAndUser()
+
+            if (Hotel.count() == 0) {
+                createAstoria()
+                createHolidayInn()
+            }
+        }
     }
 
     void createTestRoleAndUser() {
         User.withTransaction {
             def userRole = Role.findByAuthority('ROLE_USER') ?: new Role(authority: 'ROLE_USER').save(flush: true, failOnError: true)
-            def testUser = User.findByUsername('admin') ?: new User(
+            def testUser = User.findByUsername('test') ?: new User(
                     username: 'test',
                     password: 'test',
                     enabled: true).save(flush: true, failOnError: true)

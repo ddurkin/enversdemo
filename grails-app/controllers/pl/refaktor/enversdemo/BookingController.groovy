@@ -51,6 +51,19 @@ class BookingController {
         [bookingInstance: bookingInstance]
     }
 
+    def showAudit(Long id) {
+        def bookingInstance = Booking.get(id)
+        if (!bookingInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'booking.label', default: 'Booking'), id])
+            redirect(action: "list")
+            return
+        }
+        def totalCount = bookingInstance.findAllRevisionsById(bookingInstance.id).size()
+        def defaultPagination = [max: 5, sort: 'version', order: 'desc']
+        def paramsMap = defaultPagination + params
+        [revisions: bookingInstance.findAllRevisionsById(bookingInstance.id, paramsMap), totalCount: totalCount]
+    }
+
     @Secured(['ROLE_USER'])
     def edit(Long id) {
         def bookingInstance = Booking.get(id)
@@ -75,8 +88,8 @@ class BookingController {
         if (version != null) {
             if (bookingInstance.version > version) {
                 bookingInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                          [message(code: 'booking.label', default: 'Booking')] as Object[],
-                          "Another user has updated this Booking while you were editing")
+                        [message(code: 'booking.label', default: 'Booking')] as Object[],
+                        "Another user has updated this Booking while you were editing")
                 render(view: "edit", model: [bookingInstance: bookingInstance])
                 return
             }

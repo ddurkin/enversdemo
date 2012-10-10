@@ -8,5 +8,5 @@
                 action="show"
                 id="${booking.id}">current booking</g:link></span>
     <span id="bookings-label" class="property-label">data :</span>
-    <span class="property-value" >surname: ${booking.surname.encodeAsHTML()} daysCount: ${booking.daysCount} startDate : ${booking.startDate}</span>
+    <span class="property-value" >surname: ${booking.surname.encodeAsHTML()} daysCount: ${booking.daysCount} startDate : ${booking.startDate} idx : TBD</span>
 </li>

@@ -10,5 +10,10 @@ class Hotel {
     static constraints = {
     }
 
+
+    List<Booking> bookings = [] as List<Booking>
+
     static hasMany = [bookings: Booking]
+
+
 }
