@@ -12,9 +12,6 @@ class BookingControllerIntegrationSpec extends IntegrationSpec {
 
     def setup() {
         controller = new BookingController()
-    }
-
-    def cleanup() {
         DatabaseManualCleaner.cleanupDatabase(sessionFactory)
     }
 

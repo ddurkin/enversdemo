@@ -12,9 +12,6 @@ class HotelControllerIntegrationSpec extends IntegrationSpec {
 
     def setup() {
         controller = new HotelController()
-    }
-
-    def cleanup() {
         DatabaseManualCleaner.cleanupDatabase(sessionFactory)
     }
 

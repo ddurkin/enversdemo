@@ -12,7 +12,7 @@ class BookingIntegrationSpec extends IntegrationSpec {
 
     SessionFactory sessionFactory
 
-    def cleanup() {
+    def setup() {
         DatabaseManualCleaner.cleanupDatabase(sessionFactory)
     }
 
@@ -29,7 +29,7 @@ class BookingIntegrationSpec extends IntegrationSpec {
             Hotel.count() == 1
             Hotel.findAllRevisionsById(hotel.id).size() == 1
             Booking.count() == 1
-            Hotel.findAllRevisionsById(booking.id).size() == 1
+            Booking.findAllRevisionsById(booking.id).size() == 1
             UserRevisionEntity.count() == 1
     }
 }

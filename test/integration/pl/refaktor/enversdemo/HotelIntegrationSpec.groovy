@@ -12,7 +12,7 @@ class HotelIntegrationSpec extends IntegrationSpec {
 
     SessionFactory sessionFactory
 
-    def cleanup() {
+    def setup() {
         DatabaseManualCleaner.cleanupDatabase(sessionFactory)
     }
 
